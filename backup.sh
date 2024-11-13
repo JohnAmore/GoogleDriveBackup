@@ -2,9 +2,9 @@
 # Compress all files in ~/Documents directory
 function zip_all(){
 	#Edge Case– A zip file already exists in the PWD.
-	rm *.tar
-	filename="$(get_zip_format).tar"
-	tar cvf "${filename}" ~/Documents/*
+	rm *.tar.gz
+	filename="$(get_zip_format).tar.gz"
+	tar cvfz "${filename}" ~/Documents/*
 	echo "$filename"
 }
 #Returns the date format of the intended zip file.
@@ -16,7 +16,7 @@ function get_zip_format(){
 function countAndRemoveExtras(){
 	filenames=()
 	count=$(rclone lsf gdrive:/Backups | wc -l)
-	if [ $count -gt 1 ]
+	if [ $count -gt 2 ]
 	then
 		for file in $(rclone lsf "gdrive:/Backups"); 
 		do
