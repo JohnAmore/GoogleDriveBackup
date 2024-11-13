@@ -39,7 +39,7 @@ function countAndRemoveExtras(){
 #Take the zip file and move it into the Google Drive Backups directory.
 function moveToGDrive(){
 	#BUG: The zip file is not found when attempting to move it to the Backups directory in Google Drive.
-	rclone move "./*.zip" gdrive:/Backups/
+	rclone move "$1" gdrive:/Backups/
 	echo "Backup added!"
 }
 	
