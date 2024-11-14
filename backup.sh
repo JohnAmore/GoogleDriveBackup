@@ -22,21 +22,22 @@ function countAndRemoveExtras(){
 		do
 			filenames+=("$file")
 		done
-		oldest=$((${filenames[0]::-4}))
+		oldest=$(echo "$filenames[0]" | sed 's/\..*//')
+		oldest=$(($oldest))
+
 		for file in filenames;
 		do
-			fileSub=${file::-4}
+			fileSub=$(echo "$file" | sed 's/\..*//')
 			if [ $((fileSub)) -gt oldest ]
 			then
 				oldest=file
 			fi
-			rclone delete "gdrive:/Backups/$file"
 		done
-
+			rclone delete "gdrive:/Backups/$file"
 	fi
 }
 
 file=$(zip_all)
-echo "File to move: $file"
 rclone move "$file" gdrive:/Backups/
+#Check for more than 2 files and remove the oldest file.
 countAndRemoveExtras
