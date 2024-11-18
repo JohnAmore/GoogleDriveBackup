@@ -1,5 +1,4 @@
 #!/bin/bash
-set -x
 #Initialize where the .tar.gz files will go if not already initialized.
 check_for_local_backups_folder (){
 	path_to_backups_folder="/Users/danielbennett/.googleDriveBackups/"
@@ -52,6 +51,7 @@ extract_backup(){
 	#Now that we made it into the location with all the backed-up files,
 	#We can move it into the PC.
 	mv ./* $filepath_pc
+	#For reference: Change danielbennett to your username.
 	cd /Users/danielbennett/.googleDriveBackups/
 	rm -rf /Users/danielbennett/.googleDriveBackups/*
 }
